@@ -13,8 +13,6 @@ const isTouchDevice = () => {
 
 const touchBackendOptions = {
   enableMouseEvents: true,
-  delayTouchStart: 0,
-  delayMouseStart: 0,
 };
 
 const KanbanBoard = () => {
@@ -24,13 +22,11 @@ const KanbanBoard = () => {
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    console.log("Mounting KanbanBoard");
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     dispatch(setTasks(storedTasks));
   }, [dispatch]);
 
   useEffect(() => {
-    console.log("Tasks updated:", tasks);
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 

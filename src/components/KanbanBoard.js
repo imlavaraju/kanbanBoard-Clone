@@ -5,15 +5,6 @@ import Column from "./Column";
 import TaskForm from "./TaskForm";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { TouchBackend } from "react-dnd-touch-backend";
-
-const isTouchDevice = () => {
-  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
-};
-
-const touchBackendOptions = {
-  enableMouseEvents: true,
-};
 
 const KanbanBoard = () => {
   const dispatch = useDispatch();
@@ -45,23 +36,19 @@ const KanbanBoard = () => {
     filteredTasks.filter((task) => task.column === column);
 
   return (
-    <DndProvider
-      backend={
-        isTouchDevice() ? TouchBackend(touchBackendOptions) : HTML5Backend
-      }
-    >
+    <DndProvider backend={HTML5Backend}>
       <div className="p-4">
         <input
           type="text"
-          placeholder="Search tasks..."
-          className="border p-2 w-[70%] mb-4"
+          placeholder="Search Tasks..."
+          className="border p-2 w-[70%]  mb-4 rounded-full"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button
-          className="fixed w-[25%] right-4 mr-3 bg-blue-500 text-white p-2 px-4 rounded-full shadow-lg"
+          className="fixed w-[25%] right-4 md:mr-3 bg-blue-500 text-white p-1 md:p-2 md:px-4  rounded-full shadow-lg"
           onClick={() => setShowForm(true)}
         >
-          ADD TASK +
+          <span className="hidden md:inline">ADD TASK</span> +
         </button>
         {showForm && <TaskForm onClose={() => setShowForm(false)} />}
         <div className="flex flex-col md:flex-row gap-4">

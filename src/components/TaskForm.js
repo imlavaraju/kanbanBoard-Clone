@@ -1,21 +1,24 @@
+// Importing necessary dependencies and components
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../redux/tasksSlice";
 
+// TaskForm component
 const TaskForm = ({ onClose }) => {
-  const dispatch = useDispatch();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const dispatch = useDispatch(); // Dispatch hook to send actions
+  const [title, setTitle] = useState(""); // State for task title
+  const [description, setDescription] = useState(""); // State for task description
 
+  // Function to handle adding a new task
   const handleAddTask = () => {
     const newTask = {
-      id: Date.now(),
+      id: Date.now(), // Generating a unique id for the new task
       title,
       description,
-      column: "TO_DO",
+      column: "TO_DO", // Setting the initial column to "TO_DO"
     };
-    dispatch(addTask(newTask));
-    onClose();
+    dispatch(addTask(newTask)); // Dispatching addTask action
+    onClose(); // Closing the task form
   };
 
   return (
@@ -27,24 +30,24 @@ const TaskForm = ({ onClose }) => {
           placeholder="Title"
           className="border p-2 w-full mb-4"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)} // Updating title state on input change
         />
         <textarea
           placeholder="Description"
           className="border p-2 w-full mb-4"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)} // Updating description state on input change
         />
         <div className="flex justify-end">
           <button
             className="bg-gray-300 text-gray-700 p-2 rounded mr-2"
-            onClick={onClose}
+            onClick={onClose} // Closing the task form on cancel
           >
             Cancel
           </button>
           <button
             className="bg-blue-500 text-white p-2 rounded"
-            onClick={handleAddTask}
+            onClick={handleAddTask} // Adding the new task on button click
           >
             Add
           </button>
